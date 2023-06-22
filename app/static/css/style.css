@@ -1,3 +1,19 @@
 /* * {
     border: 1px solid red;
 } */
+
+*,*:before,*::after{ 
+    padding: 0; 
+    margin: 0; 
+    box-sizing: inherit; 
+}
+
+#logout-btn{
+    color: #dc3545;
+}
+#logout-btn:hover{
+    color: white;
+}
+#logout-btn:focus{
+    color: white;
+}

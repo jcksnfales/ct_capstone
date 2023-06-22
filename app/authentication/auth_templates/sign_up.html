@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container w-75">
+    <!-- HEADER TEXT -->
+    <header class="row mt-2 py-1 text-center">
+        <div class="col-12 px-0 h4">Sign Up</div>
+    </header>
+    <!-- FLASHED MESSAGES -->
+    {% include 'flashes.html' %}
+    <!-- FORM CONTENT -->
+    <div class="row">
+        <aside class="col-7 col-md-6 col-lg-5 ps-0 pe-4 mx-auto">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group my-2">
+                    <!-- EMAIL -->
+                    <fieldset id="email-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.email.label }}</small>
+                        {{ form.email(class = 'form-control', placeholder = 'email address') }}
+                    </fieldset>
+                        {% if form.email.errors %}
+                        <!-- EMAIL VALIDATION ERROR -->
+                        <div class="ms-1 text-danger"><em>{{ form.email.errors[0] }}</em></div>
+                        {% endif %}
+                    <!-- PASSWORD -->
+                    <fieldset id="pass-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.password.label }}</small>
+                        {{ form.password(class = 'form-control', placeholder = 'password') }}
+                    </fieldset>
+                    <!-- PASSWORD CONFIRM -->
+                    <fieldset id="pass-confirm-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.password_confirm.label }}</small>
+                        {{ form.password_confirm(class = 'form-control', placeholder = 'confirm password') }}
+                    </fieldset>
+                        {% if form.password.errors %}
+                        <!-- PW VALIDATION ERROR -->
+                        <div class="ms-1 text-danger"><em>{{ form.password.errors[0] }}</em></div>
+                        {% endif %}
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <div class="col-6 mx-auto">{{ form.submit_button(class = 'btn btn-primary btn-block mt-3 w-100') }}</div>
+            </form>
+        </aside>
+        <a href="{{ url_for('auth.signin') }}" class="text-secondary text-center px-0 mt-3"><em>I already have an account</em></a>
+    </div>
+</main>
+{% endblock %}

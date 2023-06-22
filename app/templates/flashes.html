@@ -1,0 +1,17 @@
+{% with flashes = get_flashed_messages(with_categories=True) %}
+    {% if flashes %}
+        <ul id="flash-messages" class="text-center list-unstyled mb-0 mt-1"> 
+        {% for category, message in flashes %}
+            {% if 'success' in category %}
+            <li class="text-success">{{ message }}</li>
+            {% elif 'fail' in category %}
+            <li class="text-danger">{{ message }}</li>
+            {% else %}
+            <li class="text-secondary">{{ message }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <!-- no flashed messages found -->
+    {% endif %}
+{% endwith %}

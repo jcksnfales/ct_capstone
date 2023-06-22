@@ -20,7 +20,15 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
                     </li>
+                <!-- LOGGED IN -->
+                {% if current_user.is_authenticated %}
                 </ul>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger nav-link my-2" id="logout-btn">Sign Out</a>
+                <!-- NOT LOGGED IN -->
+                {% else %}
+                </ul>
+                <a href="{{ url_for('auth.signin') }}" class="btn btn-primary text-white nav-link my-2">Sign In</a>
+                {% endif %}
             </div>
         </div>
     </nav>
