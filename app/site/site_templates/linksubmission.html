@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-75" id="page-content">
+    <!-- HEADER TEXT -->
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">Contribute a Book</h4>
+    </header>
+    <!-- FLASHED MESSAGES -->
+    {% include 'flashes.html' %}
+    <!-- FORM CONTENT -->
+    <div class="row">
+        <aside class="col-9 col-md-8 col-lg-7 ps-0 pe-4 mx-auto">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group my-2">
+                    <!-- LINK -->
+                    <fieldset id="link-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.listed_link.label }}</small>
+                        {{ form.listed_link(class='form-control', placeholder='link') }}
+                    </fieldset>
+                        {% if form.listed_link.errors %}
+                        <!-- URL VALIDATION ERROR -->
+                        <div class="ms-1 text-danger"><em>{{ form.listed_link.errors[0] }}</em></div>
+                        {% endif %}
+                    <!-- TITLE -->
+                    <fieldset id="title-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.link_title.label }}</small>
+                        {{ form.link_title(class='form-control', placeholder='link title') }}
+                    </fieldset>
+                    <!-- DESCRIPTION -->
+                    <fieldset id="description-field">
+                        <small class="ms-1 mb-1 text-secondary">{{ form.description.label }}</small>
+                        {{ form.description(class='form-control', placeholder='description') }}
+                    </fieldset>
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <div class="col-6 mx-auto">{{ form.submit_button(class='btn btn-success btn-block mt-3 w-100') }}</div>
+            </form>
+        </aside>
+    </div>
+</div>
+{% endblock %}

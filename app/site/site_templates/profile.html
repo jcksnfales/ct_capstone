@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-75">
+    <!-- HEADER -->
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">User Info</h4>
+    </header>
+    <!-- FLASHES -->
+    {% include 'flashes.html' %}
+    <!-- USER INFO -->
+    <section class="row">
+        <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Email:</strong> {{ current_user.email }}</li>
+                <li class="list-group-item"><strong>API Token:</strong> <samp>{{ current_user.token }}</samp></li>
+            </ul>
+        </div>
+    </section>
+    <!-- LINKS -->
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">Your Links</h4>
+    </header>
+    <a href="/submit">Submit Link</a>
+    {{ links }}
+</div>
+{% endblock %}

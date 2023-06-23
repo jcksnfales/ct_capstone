@@ -51,7 +51,7 @@ def signin():
                 # if the username and password are valid, log user in and return a success message
                 login_user(logged_user)
                 flash('Successfully logged in.', 'auth-login-success')
-                return redirect('/')
+                return redirect('/profile')
             else:
                 # if the username/password are NOT valid, return the user an error message
                 flash('Incorrect username or password.', category='auth-login-failed')
