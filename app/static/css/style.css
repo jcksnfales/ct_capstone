@@ -8,6 +8,10 @@
     box-sizing: inherit; 
 }
 
+.p-indented{
+    text-indent: 1.5em;
+}
+
 #logout-btn{
     color: #dc3545;
 }

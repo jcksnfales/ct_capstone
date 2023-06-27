@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="../static/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script src="../static/scripts/main.js"></script>
 <title>LinkList</title>
 </head>
 <body class="bg-dark text-white" style="padding-top:85px;">
@@ -20,17 +23,23 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/api/info" class="nav-link">API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/users/all" class="nav-link">Users</a>
+                    </li>
                 <!-- LOGGED IN -->
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <a href="/profile" class="nav-link">Profile</a>
                     </li>
                 </ul>
-                <a href="/signout" class="btn btn-outline-danger nav-link my-2" id="logout-btn">Sign Out</a>
+                <a href="/signout" class="btn btn-outline-danger nav-link ms-2 my-2" id="logout-btn">Sign Out</a>
                 <!-- NOT LOGGED IN -->
                 {% else %}
                 </ul>
-                <a href="/signin" class="btn btn-primary text-white nav-link my-2">Sign In</a>
+                <a href="/signin" class="btn btn-primary text-white nav-link ms-2 my-2">Sign In</a>
                 {% endif %}
             </div>
         </div>
@@ -38,7 +47,5 @@
 
     {% block content %}
     {% endblock content %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 </body>
 </html>

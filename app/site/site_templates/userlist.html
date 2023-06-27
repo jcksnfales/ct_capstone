@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-75">
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">Users</h4>
+    </header>
+    <section class="row">
+        <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
+            {% if users %}
+            <!-- users found -->
+            <div id="table-container" class="rounded overflow-hidden">
+                <table class="table table-light table-striped m-0">
+                    <thead>
+                        <th scope="col" class="text-center">User</th>
+                        <th scope="col" class="text-center" style="width:7.5em">Action</th>
+                    </thead>
+                    <tbody>
+                        {% for user_num in range(users|length) %}
+                        <tr>
+                            <td class="ps-3 py-3">
+                                <b>{{ users[user_num].email }}</b> - {{ users[user_num].public_link_count }} public link(s)
+                            </td>
+                            <td class="text-center">
+                                <a href="/users/{{ users[user_num].id }}" class="btn btn-sm btn-primary py-2">Go to user page</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <!-- no users found -->
+            <ul class="list-group">
+                <li class="list-group-item text-center"><strong>No users!</strong></li>
+            </ul>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

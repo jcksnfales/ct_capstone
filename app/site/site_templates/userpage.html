@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-75">
+    <div class="d-flex my-3">
+        <a href="/users/all" class="btn btn-primary mx-auto">Go back</a>
+    </div>
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">Public Links</h4>
+        <p class="col-12 px-0 text-center">for <b>{{ user.email }}</b></p>
+    </header>
+    <section class="row">
+        <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
+            <ul class="list-group">
+                {% for link_num in range(links|length) %}
+                <li class="list-group-item py-3">
+                    <p class="m-0">
+                        <b>{{ links[link_num].link_title }} -</b>
+                        <a href="{{ links[link_num].listed_link }}">{{ links[link_num].listed_link }}</a>
+                    </p>
+                    <p class="m-0 p-indented">{{ links[link_num].description }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock content %}

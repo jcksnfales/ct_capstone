@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, URL
 
 # AUTH LOGIN FORM
@@ -20,4 +20,5 @@ class LinkSubmissionForm(FlaskForm):
     listed_link = StringField('Link', validators=[DataRequired(), URL(message='Please enter a valid URL.')])
     link_title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description')
+    is_public = BooleanField('Is Public?')
     submit_button = SubmitField('Submit')

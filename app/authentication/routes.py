@@ -61,8 +61,8 @@ def signin():
     return render_template('sign_in.html', form=form)
 
 # LOG OUT
-@auth.route('/logout')
+@auth.route('/signout')
 def logout():
     logout_user()
-    flash('Successfully logged out.', 'auth-logout-success')
+    flash('Successfully signed out.', 'auth-logout-success')
     return redirect('/signin')

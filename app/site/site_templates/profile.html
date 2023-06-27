@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class="container w-75">
-    <!-- HEADER -->
-    <header class="row mt-2 py-1">
-        <h4 class="col-12 px-0 text-center">User Info</h4>
-    </header>
     <!-- FLASHES -->
     {% include 'flashes.html' %}
     <!-- USER INFO -->
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">User Info</h4>
+    </header>
     <section class="row">
         <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
             <ul class="list-group">
@@ -21,7 +20,77 @@
     <header class="row mt-2 py-1">
         <h4 class="col-12 px-0 text-center">Your Links</h4>
     </header>
-    <a href="/submit">Submit Link</a>
-    {{ links }}
+    <div class="d-flex mb-3">
+        <a href="/submit" class="btn btn-success mx-auto">Add New</a>
+    </div>
+    <section class="row">
+        <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
+            {% if links %}
+            <!-- links found -->
+            <div id="table-container" class="rounded overflow-hidden">
+                <table class="table table-light table-striped m-0">
+                    <thead>
+                        <th scope="col" class="text-center">Link</th>
+                        <th scope="col" class="text-center" style="width:3em">Public?</th>
+                        <th scope="col" class="text-center" style="width:4em">Action</th>
+                    </thead>
+                    <tbody>
+                        {% for link_num in range(links|length) %}
+                        <tr>
+                            <td class="ps-3 py-3">
+                                <p class="m-0">
+                                    <b>{{ links[link_num].link_title }} -</b>
+                                    <a href="{{ links[link_num].listed_link }}">{{ links[link_num].listed_link }}</a>
+                                </p>
+                                <p class="m-0 p-indented">{{ links[link_num].description }}</p>
+                            </td>
+                            <td class="pt-4 text-center">
+                                {% if links[link_num].is_public %}
+                                <h4 class="text-success">&#x2713;</h4>
+                                {% else %}
+                                <h4 class="text-danger">&#x2717;</h4>
+                                {% endif %}
+                            </td>
+                            <td class="pt-4 text-center">
+                                <button
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="replaceModalLink(`{{ links[link_num].listing_id }}`)"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#confirmation-modal"
+                                >Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <!-- no links found -->
+            <ul class="list-group">
+                <li class="list-group-item text-center"><strong>You have no links!</strong></li>
+                <li class="list-group-item text-center">Add a link with the button above.</li>
+            </ul>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- DELETION CONFIRMATION MODAL -->
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-bottom-0">
+                    <h4 class="modal-title text-center" id="modal-label">Are you sure?</h4>
+                </div>
+                <div class="modal-body py-0 text-light">
+                    This will delete this link listing forever.
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="/delete/id" class="btn btn-danger" id="modal-confirm-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

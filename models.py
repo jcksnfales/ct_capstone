@@ -33,6 +33,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False)
     password = db.Column(db.String, nullable=True, default='')
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    public_link_count = db.Column(db.Integer, default=0)
 
     def __init__(self, email, first_name='', last_name='', password=''):
         self.id = set_id()
@@ -41,13 +42,14 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.password = self.set_password(password)
         self.email = email
+        self.public_link_count = 0
     
     def set_password(self, password):
         self.pw_hash = generate_password_hash(password)
         return self.pw_hash
 
     def __repr__(self):
-        return f'User {self.email}'
+        return f'{self.email} - {self.public_link_count} public link(s)'
 
 # link listing model
 class LinkListing(db.Model):
@@ -55,21 +57,23 @@ class LinkListing(db.Model):
     user_id = db.Column(db.String(36), nullable=False)
     listed_link = db.Column(db.String, nullable=False)
     link_title = db.Column(db.String, nullable=False)
-    description = db.Column(db.String)
+    description = db.Column(db.String, default='')
+    is_public = db.Column(db.Boolean, default=False)
 
-    def __init__(self, user_id, listed_link, link_title, description=''):
+    def __init__(self, user_id, listed_link, link_title, description='', is_public=False):
         self.listing_id = set_id()
         self.user_id = user_id
         self.listed_link = listed_link
         self.link_title = link_title
         self.description = description
+        self.is_public = is_public
 
     def __repr__(self):
         return f'{self.listed_link} - {self.link_title}: {self.description}'
     
 class LinkSchema(ma.Schema):
     class Meta:
-        fields = ['listing_id', 'user_id', 'listed_link', 'link_title', 'description']
+        fields = ['listing_id', 'user_id', 'listed_link', 'link_title', 'description', 'is_public']
 
 link_schema = LinkSchema()
 links_schema = LinkSchema(many=True)
