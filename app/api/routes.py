@@ -4,6 +4,13 @@ from models import db, User, LinkListing, link_schema, links_schema
 
 api = Blueprint('api',__name__, url_prefix='/api')
 
+# UTILITY
+def count_public_links(user_id):
+    user_public_listings = len(LinkListing.query.filter_by(user_id=user_id, is_public=True).all())
+    updated_user = User.query.get(user_id)
+    updated_user.public_link_count = user_public_listings
+    db.session.commit()
+
 # INFO PAGE
 @api.route('/info')
 def info():
@@ -21,6 +28,8 @@ def create(token_user):
     # add link listing to database
     db.session.add(new_link)
     db.session.commit()
+    # update user's public link count
+    count_public_links(token_user.id)
     # return link info to user to confirm addition
     return jsonify({'message': 'Link successfully added'}, link_schema.dump(new_link))
 
@@ -109,6 +118,8 @@ def update(token_user, link_id):
             return jsonify({'message': 'JSON key error (are you missing a field?)'})
         # commit changes to database
         db.session.commit()
+        # update user's public link count
+        count_public_links(token_user.id)
         # return new listing info to user to confirm update
         return jsonify({'message': 'Link successfully updated'}, link_schema.dump(updated_link))
     else:
@@ -132,6 +143,8 @@ def delete(token_user, link_id):
         # if listing owned by token user, delete listing and commit change to database
         db.session.delete(deleted_link)
         db.session.commit()
+        # update user's public link count
+        count_public_links(token_user.id)
         # return confirmation message to user
         return jsonify({'message': 'Link successfully deleted'}, link_schema.dump(deleted_link))
     else:

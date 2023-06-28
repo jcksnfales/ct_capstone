@@ -1,0 +1,39 @@
+<div class="row">
+    <aside class="col-9 col-md-8 col-lg-7 ps-0 pe-4 mx-auto">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group my-2">
+                <!-- LINK -->
+                <fieldset id="link-field">
+                    <small class="ms-1 mb-1 text-secondary">{{ form.listed_link.label }}</small>
+                    {{ form.listed_link(class='form-control', placeholder='http://link.com') }}
+                </fieldset>
+                    {% if form.listed_link.errors %}
+                    <!-- URL VALIDATION ERROR -->
+                    <div class="ms-1 text-danger"><em>{{ form.listed_link.errors[0] }}</em></div>
+                    {% endif %}
+                <!-- TITLE -->
+                <fieldset id="title-field">
+                    <small class="ms-1 mb-1 text-secondary">{{ form.link_title.label }}</small>
+                    {{ form.link_title(class='form-control', placeholder='link title') }}
+                </fieldset>
+                <!-- DESCRIPTION -->
+                <fieldset id="description-field">
+                    <small class="ms-1 mb-1 text-secondary">{{ form.description.label }}</small>
+                    {{ form.description(class='form-control', placeholder='description') }}
+                </fieldset>
+                <!-- IS PUBLIC? -->
+                <fieldset id="visibility-field" class="mt-3 ms-2 ps-4 d-flex justify-content-center align-items-center">
+                    <span class="me-2 mb-1 text-secondary">{{ form.is_public.label }}</span>
+                    {{ form.is_public(class='form-check') }}
+                </fieldset>
+                <div class="w-75 mx-auto ps-4 text-center text-secondary">
+                    <small>If checked, link will be visible to everyone who visits your user page.</small><br>
+                    <small>If left unchecked, link will only be visible to you on your profile and through the API.</small>
+                </div>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <div class="col-6 mx-auto">{{ form.submit_button(class='btn btn-success btn-block mt-3 w-100') }}</div>
+        </form>
+    </aside>
+</div>

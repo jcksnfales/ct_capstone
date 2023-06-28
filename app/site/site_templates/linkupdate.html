@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-75">
+    <!-- HEADER TEXT -->
+    <header class="row mt-2 py-1">
+        <h4 class="col-12 px-0 text-center">Update Link</h4>
+    </header>
+    <!-- FLASHED MESSAGES -->
+    {% include 'flashes.html' %}
+    <!-- FORM CONTENT -->
+    {% include 'linkform.html' %}
+</div>
+<!-- DATA INJECTION SCRIPT -->
+<script type="text/javascript">
+    let fieldData = {
+        "listed_link": "{{ listing_data.listed_link }}",
+        "link_title": "{{ listing_data.link_title }}",
+        "description": "{{ listing_data.description }}",
+        "is_public": ("{{ listing_data.is_public }}" === 'True')
+    };
+    window.onload = fillFormFields(fieldData);
+</script>
+{% endblock %}

@@ -2,8 +2,36 @@
 
 {% block content %}
 <div class="container w-75">
-    <header class="row mt-2 py-1">
-        <h4 class="col-12 px-0 text-center">Index</h4>
-    </header>
+    <section class="d-md-flex flex-row-reverse">
+        <div class="col-12 col-md-8 d-flex flex-column justify-content-center align-items-right text-center">
+            <h4>Catalog and save your links!</h4>
+            <p>Submit and manage link data through this webapp; it'll be stored persistently for you in our database.</p>
+            <div class="w-fit mx-auto">
+                {% if current_user.is_authenticated %}
+                <!-- LOGGED IN -->
+                <a href="/profile" class="btn btn-primary">Get Started</a>
+                {% else %}
+                <!-- NOT LOGGED IN -->
+                <a href="/signup" class="btn btn-primary">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <img src="../../static/img/serverstack.svg" alt="" class="img-fluid p-4 w-50 mx-auto">
+        </div>
+    </section>
+
+    <section class="d-md-flex flex-row">
+        <div class="col-12 col-md-8 d-flex flex-column justify-content-center align-items-right text-center">
+            <h4>Interact with data through our API!</h4>
+            <p>Push, pull, and otherwise manage data externally as you need it.</p>
+            <div class="w-fit mx-auto">
+                <a href="/api/info" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <img src="../../static/img/api.svg" alt="" class="img-fluid p-4 w-50 mx-auto">
+        </div>
+    </section>
 </div>
 {% endblock %}

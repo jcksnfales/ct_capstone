@@ -29,15 +29,15 @@
                     <li class="nav-item">
                         <a href="/users/all" class="nav-link">Users</a>
                     </li>
-                <!-- LOGGED IN -->
                 {% if current_user.is_authenticated %}
+                <!-- LOGGED IN -->
                     <li class="nav-item">
                         <a href="/profile" class="nav-link">Profile</a>
                     </li>
                 </ul>
                 <a href="/signout" class="btn btn-outline-danger nav-link ms-2 my-2" id="logout-btn">Sign Out</a>
-                <!-- NOT LOGGED IN -->
                 {% else %}
+                <!-- NOT LOGGED IN -->
                 </ul>
                 <a href="/signin" class="btn btn-primary text-white nav-link ms-2 my-2">Sign In</a>
                 {% endif %}
@@ -47,5 +47,9 @@
 
     {% block content %}
     {% endblock content %}
+
+    <footer class="row mt-3">
+        <div class="col-12 px-0 text-center text-secondary"><small>&copy; 2023 Jackson Fales</small></div>
+    </footer>
 </body>
 </html>

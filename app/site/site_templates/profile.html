@@ -32,7 +32,7 @@
                     <thead>
                         <th scope="col" class="text-center">Link</th>
                         <th scope="col" class="text-center" style="width:3em">Public?</th>
-                        <th scope="col" class="text-center" style="width:4em">Action</th>
+                        <th scope="col" class="text-center" style="width:8em">Action</th>
                     </thead>
                     <tbody>
                         {% for link_num in range(links|length) %}
@@ -52,6 +52,7 @@
                                 {% endif %}
                             </td>
                             <td class="pt-4 text-center">
+                                <a href="/update/{{ links[link_num].listing_id }}" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 <button
                                     class="btn btn-sm btn-outline-danger"
                                     onclick="replaceModalLink(`{{ links[link_num].listing_id }}`)"
