@@ -7,6 +7,9 @@
     margin: 0; 
     box-sizing: inherit; 
 }
+code {
+    color: #0d6efd;
+}
 
 .p-indented{
     text-indent: 1.5em;

@@ -2,8 +2,72 @@
 
 {% block content %}
 <div class="container w-75">
+    <section class="d-md-flex flex-row-reverse">
+        <div class="col-12 col-md-8 d-flex flex-column justify-content-center align-items-right text-center">
+            <h4>API Info</h4>
+            <p>Learn all you need to know about how to interact with the API here.</p>
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <img src="../../static/img/api.svg" alt="" class="img-fluid p-4 w-50 mx-auto">
+        </div>
+    </section>
+
     <header class="row mt-2 py-1">
-        <h4 class="col-12 px-0 text-center">API Info</h4>
+        <h2 class="col-12 px-0 text-center">General Conventions</h2>
     </header>
+    <section class="d-md-flex flex-row">
+        <div class="col-12 col-md-6 mt-3 pb-1">
+            <h4 class="text-center">Headers</h4>
+            <div class="text-center mx-2">All requests should have a header called <code>x-access-token</code> with a body containing <code>Bearer &lt;your access token&gt;</code>, where <code>&lt;your access token&gt;</code> is replaced with your API access token found on your Profile page.</div>
+        </div>
+        <div class="col-12 col-md-6 mt-3 pb-1">
+            <h4 class="text-center">Methods</h4>
+            <div class="text-center mx-2">All requests must include a valid method matching the type of request being made. For instance, pulling data needs a <code>GET</code> method, sending data needs a <code>POST</code> method, and deleting data needs a <code>DELETE</code> method.</div>
+        </div>
+    </section>
+
+    <header class="row mt-2 py-1">
+        <h2 class="col-12 px-0 text-center">Routes</h2>
+    </header>
+    <section class="row">
+        <div id="table-container" class="rounded overflow-auto px-0">
+            <table class="table table-light table-striped m-0">
+                <thead>
+                    <th scope="col" class="text-center" style="width:14em">Route</th>
+                    <th scope="col" class="text-center">Description</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code><div class="text-dark">/api/submit</div></code></td>
+                        <td>Submit a new link to your profile. Request body must contain JSON with <code>listing_id</code>, <code>link_title</code>, <code>description</code>, and <code>is_public</code> fields and desired values. <code>is_public</code> should be a boolean value, and all other fields should be strings.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/update/</div>&lt;listing id&gt;</code></td>
+                        <td>Update an existing given link belonging to you. <code>&lt;listing id&gt;</code> should be replaced with the ID of the link listing you'd like to edit. Request body must follow the same rules as listed for the Submit route above.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/get/all</div></code></td>
+                        <td>Get all publicly listed links from other users, and both public and non-public links belonging to you.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/get/mine</div></code></td>
+                        <td>Get all links belonging to you, both public and non-public.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/get/user/</div>&lt;user id&gt;</code></td>
+                        <td>Get public links belonging to a given user, or both public and non-public links belonging to you if you're querying your own ID. <code>&lt;user id&gt;</code> should be replaced with the ID (not token) of the user you'd like to get the links of.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/get/link/</div>&lt;listing id&gt;</code></td>
+                        <td>Get a specific existing link. Link must either belong to you or be public. <code>&lt;listing id&gt;</code> should be replaced with the ID of the link listing you'd like the data of.</td>
+                    </tr>
+                    <tr>
+                        <td><code><div class="text-dark d-inline">/api/delete/</div>&lt;listing id&gt;</code></td>
+                        <td>Delete an existing link. Link must belong to you. <code>&lt;listing id&gt;</code> should be replaced with the ID of the link listing you'd like to delete.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </div>
 {% endblock content %}

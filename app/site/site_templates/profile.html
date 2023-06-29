@@ -27,12 +27,12 @@
         <div class="col-12 col-md-11 col-lg-10 mx-auto ps-1 pe-0">
             {% if links %}
             <!-- links found -->
-            <div id="table-container" class="rounded overflow-hidden">
+            <div id="table-container" class="rounded overflow-auto">
                 <table class="table table-light table-striped m-0">
                     <thead>
                         <th scope="col" class="text-center">Link</th>
                         <th scope="col" class="text-center" style="width:3em">Public?</th>
-                        <th scope="col" class="text-center" style="width:8em">Action</th>
+                        <th scope="col" class="text-center" style="width:7em">Action</th>
                     </thead>
                     <tbody>
                         {% for link_num in range(links|length) %}
