@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, redirect, request, flash
 from flask_login import current_user
 from models import db, User, LinkListing, link_schema, links_schema
 from forms import LinkSubmissionForm
+from helpers import count_public_links
 
 site = Blueprint('site', __name__, template_folder='site_templates')
+
 
 # HOME
 @site.route('/')
@@ -60,7 +62,8 @@ def submit():
             # commit changes to database
             db.session.commit()
 
-            # TODO update user's public link count
+            # update user's public link count
+            count_public_links(current_user.id)
 
             # flash success message
             flash(f'Successfully added new links', category='link-submit-success')
@@ -92,7 +95,8 @@ def update(link_id):
             # commit changes to database
             db.session.commit()
 
-            # TODO update user's public link count
+            # update user's public link count
+            count_public_links(current_user.id)
 
             # flash success message and redirect back to profile
             flash(f'Successfully edited link', category='link-submit-success')
@@ -115,7 +119,8 @@ def delete(id):
         # commit changes to database
         db.session.commit()
 
-        # TODO update user's public link count
+        # update user's public link count
+        count_public_links(current_user.id)
 
         # flash success message
         flash(f'Successfully deleted link.', category='link-delete-success')

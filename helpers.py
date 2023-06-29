@@ -2,8 +2,13 @@ from functools import wraps
 import secrets
 from flask import request, jsonify, json
 import decimal
+from models import User, LinkListing, db
 
-from models import User
+def count_public_links(user_id):
+    user_public_listings = len(LinkListing.query.filter_by(user_id=user_id, is_public=True).all())
+    updated_user = User.query.get(user_id)
+    updated_user.public_link_count = user_public_listings
+    db.session.commit()
 
 def token_required(our_flask_function):
     @wraps(our_flask_function)

@@ -1,15 +1,9 @@
 from flask import Blueprint, request, jsonify, render_template
-from helpers import token_required
+from helpers import token_required, count_public_links
 from models import db, User, LinkListing, link_schema, links_schema
 
 api = Blueprint('api',__name__, url_prefix='/api')
 
-# UTILITY
-def count_public_links(user_id):
-    user_public_listings = len(LinkListing.query.filter_by(user_id=user_id, is_public=True).all())
-    updated_user = User.query.get(user_id)
-    updated_user.public_link_count = user_public_listings
-    db.session.commit()
 
 # INFO PAGE
 @api.route('/info')
