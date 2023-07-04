@@ -9,8 +9,8 @@ def hello(ctx):
     return "Hello world!"
 
 @discord_bot.command("share_user_links")
-def share_user_links(ctx, user_id: str):
-    "Returns a given link's information"
+def share_user_links(ctx, user_id: any):
+    "Returns a given user's publicly listed links"
     listings = LinkListing.query.filter_by(user_id=user_id).all()
     links_component = []
     for listing in listings:
