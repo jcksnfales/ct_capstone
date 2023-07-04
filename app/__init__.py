@@ -24,7 +24,7 @@ app.register_blueprint(api)
 
 discord.register_blueprint(discord_bot)
 discord.set_route('/interactions')
-discord.update_commands(app)
+discord.update_commands(guild_id="393453955276865546")
 
 app.json_encoder = JSONEncoder
 root_db.init_app(app)
