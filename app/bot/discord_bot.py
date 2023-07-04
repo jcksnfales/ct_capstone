@@ -33,5 +33,6 @@ def share_user_links(ctx, user_id: str):
 
 @share_user_links.autocomplete()
 def autocomplete(ctx, user_id=None):
+    "The ID of the user whose links are being queried. Can be found at the end of their user page URL."
     queried = User.query.filter(User.public_link_count > 0).all()
     return queried
