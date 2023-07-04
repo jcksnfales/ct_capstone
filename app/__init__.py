@@ -22,6 +22,10 @@ app.register_blueprint(site)
 app.register_blueprint(auth)
 app.register_blueprint(api)
 
+@discord.command()
+def ping(ctx):
+    return "Pong!"
+
 discord.register_blueprint(discord_bot)
 discord.set_route('/interactions')
 discord.update_commands(guild_id="393453955276865546")
