@@ -16,12 +16,11 @@ def share_user_links(ctx, user_id: str):
     for listing in listings:
         links_component += [
             ActionRow(
-                content=listing.link_title,
                 components=[
                     Button(
                         style=ButtonStyles.LINK,
                         url=listing.listed_link,
-                        label="Go to link"
+                        label=listing.link_title
                     )
                 ]
             )
