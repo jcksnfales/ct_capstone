@@ -11,7 +11,7 @@ def hello(ctx):
 @discord_bot.command("share_user_links")
 def share_user_links(ctx, user_id: str):
     "Returns a given link's information"
-    return LinkListing.query.filter(user_id=user_id).all()
+    return LinkListing.query.filter_by(user_id=user_id).all()
 
 @share_user_links.autocomplete()
 def autocomplete(ctx, user_id=None):
