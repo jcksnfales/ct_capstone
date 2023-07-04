@@ -8,12 +8,12 @@ def hello(ctx):
     "Simple hello world test command"
     return "Hello world!"
 
-@discord_bot.command("share_link")
-def share_link(ctx, value: str):
+@discord_bot.command("share_user_links")
+def share_user_links(ctx, user_id: str):
     "Returns a given link's information"
-    return f"{value}"
+    return LinkListing.query.filter(user_id=user_id).all()
 
-@share_link.autocomplete()
-def autocomplete(ctx, value=None):
-    queried_links = LinkListing.query.filter_by(is_public=True).all()
-    return queried_links
+@share_user_links.autocomplete()
+def autocomplete(ctx, user_id=None):
+    queried = User.query.filter(User.public_link_count > 0).all()
+    return queried
